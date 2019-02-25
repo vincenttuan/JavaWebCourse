@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket Test</title>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/webSocket.js"></script>
+    </head>
+    <body style="padding: 20px">
+
+        <div>
+            <form class="pure-form" id="chatRoomForm" onsubmit="return false;">
+                <fieldset>
+                    <legend>聊天室</legend>
+                    <input type="text" id="userNameInput" placeholder="請輸入名稱" /> 
+                    <input type="button" id="loginBtn" value="登入" class="pure-button pure-button-primary" /> 
+                    <span id="infoWindow"></span>
+                    <p />    
+                    <input type="text" id="userinput" placeholder="請輸入訊息" /> 
+                    <input type="submit" value="送出訊息" class="pure-button pure-button-primary" />
+                </fieldset>
+            </form>
+        </div>
+        <div id="messageDisplay"></div>
+    </body>
+</html>
