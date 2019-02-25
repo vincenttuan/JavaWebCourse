@@ -41,8 +41,10 @@ window.onload = function () {
 
     //設置WebSocket
     function setWebSocket() {
+        var url = 'ws://' + window.location.hostname + ':8084/JavaWebCourse/websocket';
+        console.log(url);
         //開始WebSocket連線
-        webSocket = new WebSocket('ws://localhost:8084/JavaWebCourse/websocket');
+        webSocket = new WebSocket(url);
         //以下開始偵測WebSocket的各種事件
 
         //onerror , 連線錯誤時觸發  
