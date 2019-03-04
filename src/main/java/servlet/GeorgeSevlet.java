@@ -9,6 +9,7 @@ import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 public class GeorgeSevlet extends GenericServlet{
 
@@ -20,7 +21,9 @@ public class GeorgeSevlet extends GenericServlet{
             int number = new Random().nextInt(46) + 1;
             lotto.add(number);
         }
-        out.print("Lotto number = " + lotto);
+        out.println("Lotto number = " + lotto);
+        String uri = ((HttpServletRequest)req).getRequestURI();
+        out.println(uri);
     }
 
     

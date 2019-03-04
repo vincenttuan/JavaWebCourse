@@ -5,10 +5,17 @@
         <servlet-name>GeorgeSevlet</servlet-name>
         <servlet-class>servlet.GeorgeSevlet</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>GeorgeSevlet</servlet-name>
         <url-pattern>/servlet/GeorgeSevlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>GeorgeSevlet</servlet-name>
+        <url-pattern>/supervisor/GeorgeSevlet</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
