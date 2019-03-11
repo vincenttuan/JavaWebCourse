@@ -4,19 +4,64 @@
         <title>Base Form</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function doGet() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "/JavaWebCourse/servlet/MyHttpServlet", true);
+                xhttp.send();
+            }
+            function doPost() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("POST", "/JavaWebCourse/servlet/MyHttpServlet", true);
+                xhttp.send();
+            }
+            function doPut() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("PUT", "/JavaWebCourse/servlet/MyHttpServlet", true);
+                xhttp.send();
+            }
+        </script>
     </head>
     <body style="padding: 10px">
         <form class="pure-form" method="get" action="/JavaWebCourse/servlet/MyHttpServlet">
             <fieldset>
                 <legend>Get</legend>
                 <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="doGet()">JS Submit</button>
             </fieldset>
         </form>
         <form class="pure-form" method="post" action="/JavaWebCourse/servlet/MyHttpServlet">
             <fieldset>
                 <legend>Post</legend>
                 <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="doPost()">JS Submit</button>
             </fieldset>
         </form>
+        <form class="pure-form">
+            <fieldset>
+                <legend>Put</legend>
+                <button type="button" class="pure-button pure-button-primary" onclick="doPut()">JS Submit</button>
+            </fieldset>
+        </form>
+        
+        <div id="demo"></div>
     </body>
 </html>
