@@ -11,7 +11,9 @@
                 console.log(content);
                 var obj = JSON.parse(content);
                 document.getElementById('demo').innerHTML = obj.title + "<p>"
+                        + obj.ofileName + "<p>"
                         + obj.fileName + "<p>"
+                        + obj.bytes + "<p>"
                         + "<img src='data:image/png;base64," + obj.base64 + "'>";
             }
             function ajaxSubmit(oFormElement) {

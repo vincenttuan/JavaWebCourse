@@ -28,7 +28,9 @@ public class UploadServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         
         String title = "";
+        String ofileName = "";
         String fileName = "";
+        int bytes = 0;
         String base64 = "";
         for (Part part : req.getParts()) {
             switch (part.getName()) {
@@ -38,14 +40,16 @@ public class UploadServlet extends HttpServlet {
                 case "upload":
                     fileName = File.createTempFile("Mclaren", ".jpg").getName();
                     part.write(fileName);
+                    ofileName = Util.getFileName(part);
                     InputStream is = part.getInputStream();
+                    bytes = is.available();
                     base64 = Util.getBase64(is);
                     break;
             }
         }
         
-        String json = "{\"title\":\"%s\", \"fileName\":\"%s\", \"base64\":\"%s\"}";
-        json = String.format(json, title, fileName, base64);
+        String json = "{\"title\":\"%s\", \"ofileName\":\"%s\", \"fileName\":\"%s\", \"bytes\":\"%d\", \"base64\":\"%s\"}";
+        json = String.format(json, title, ofileName, fileName, bytes, base64);
         out.println(json);
         
     }
