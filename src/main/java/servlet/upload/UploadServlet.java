@@ -28,25 +28,23 @@ public class UploadServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         
         String title = "";
+        String fileName = "";
         for (Part part : req.getParts()) {
             switch (part.getName()) {
                 case "title":
-//                    InputStream is = part.getInputStream();
-//                    byte[] b = new byte[1];
-//                    while(is.read(b) != -1) {
-//                        out.print((char)b[0]);
-//                    }
                     title = Util.getValue(part.getInputStream());
                     break;
                 case "upload":
-                    String fileName = File.createTempFile("Mclaren", ".jpg").getName();
+                    fileName = File.createTempFile("Mclaren", ".jpg").getName();
                     part.write(fileName);
                     break;
             }
         }
         
-        out.print(title);
-        out.print("Upload OK");
+        String json = "{\"title\":\"%s\", \"fileName\":\"%s\"}";
+        json = String.format(json, title, fileName);
+        out.println(json);
+        
     }
     
 }
