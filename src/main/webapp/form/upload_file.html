@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="expires" content="0">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <title>File Upload</title>
+    </head>
+    <body style="padding: 20px">
+        <form class="pure-form pure-form-stacked"
+              method="post"
+              action="/JavaWebCourse/servlet/upload/UploadServlet"
+              enctype="multipart/form-data">
+            <fieldset>
+                <legend>Upload File</legend>
+                標題 (title) : <input type="text" name="title" /><br>
+                檔案上傳 (upload): <input type="file" multiple name="upload"><br>
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </form>
+
+    </body>
+</html>
