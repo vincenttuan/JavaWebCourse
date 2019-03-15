@@ -9,6 +9,10 @@
             function ajaxSuccess() {
                 var content = this.responseText;
                 console.log(content);
+                var obj = JSON.parse(content);
+                document.getElementById('demo').innerHTML = obj.title + "<p>"
+                        + obj.fileName + "<p>"
+                        + "<img src='data:image/png;base64," + obj.base64 + "'>";
             }
             function ajaxSubmit(oFormElement) {
                 if (!oFormElement.action) {
@@ -34,6 +38,6 @@
                 <input type="submit" value="Submit" />
             </fieldset>
         </form>
-
+        <div id="demo"></div>
     </body>
 </html>

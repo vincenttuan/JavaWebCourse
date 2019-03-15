@@ -29,6 +29,7 @@ public class UploadServlet extends HttpServlet {
         
         String title = "";
         String fileName = "";
+        String base64 = "";
         for (Part part : req.getParts()) {
             switch (part.getName()) {
                 case "title":
@@ -37,12 +38,14 @@ public class UploadServlet extends HttpServlet {
                 case "upload":
                     fileName = File.createTempFile("Mclaren", ".jpg").getName();
                     part.write(fileName);
+                    InputStream is = part.getInputStream();
+                    base64 = Util.getBase64(is);
                     break;
             }
         }
         
-        String json = "{\"title\":\"%s\", \"fileName\":\"%s\"}";
-        json = String.format(json, title, fileName);
+        String json = "{\"title\":\"%s\", \"fileName\":\"%s\", \"base64\":\"%s\"}";
+        json = String.format(json, title, fileName, base64);
         out.println(json);
         
     }
