@@ -1,5 +1,6 @@
 package servlet.upload;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -37,12 +38,13 @@ public class UploadServlet extends HttpServlet {
                     title = Util.getValue(part.getInputStream());
                     break;
                 case "upload":
-                    out.println("get upload");
+                    String fileName = File.createTempFile("Mclaren", ".jpg").getName();
+                    part.write("c:/temp/" + fileName);
                     break;
             }
         }
         
-        out.append(title);
+        out.print(title);
         out.print("Upload OK");
     }
     
