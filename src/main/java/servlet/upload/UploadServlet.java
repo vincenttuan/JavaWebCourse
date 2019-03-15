@@ -15,6 +15,7 @@ import utils.Util;
 
 @WebServlet("/servlet/upload/UploadServlet")
 @MultipartConfig(
+                location="c:/temp/",
                  fileSizeThreshold=1024*1024*2, // 2MB
                  maxFileSize=1024*1024*10,      // 10MB
                  maxRequestSize=1024*1024*50)   // 50MB
@@ -39,7 +40,7 @@ public class UploadServlet extends HttpServlet {
                     break;
                 case "upload":
                     String fileName = File.createTempFile("Mclaren", ".jpg").getName();
-                    part.write("c:/temp/" + fileName);
+                    part.write(fileName);
                     break;
             }
         }
