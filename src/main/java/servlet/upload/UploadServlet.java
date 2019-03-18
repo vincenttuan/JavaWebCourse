@@ -32,10 +32,17 @@ public class UploadServlet extends HttpServlet {
         String fileName = "";
         int bytes = 0;
         String base64 = "";
+        boolean authCodeOK = false;
+        
         for (Part part : req.getParts()) {
             switch (part.getName()) {
                 case "title":
                     title = Util.getValue(part.getInputStream());
+                    break;
+                case "myAuthCode":
+                    String myAuthCode = Util.getValue(part.getInputStream());
+                    String authCode = req.getSession().getAttribute("authCode").toString();
+                    authCodeOK = myAuthCode.equalsIgnoreCase(authCode);
                     break;
                 case "upload":
                     fileName = File.createTempFile("Mclaren", ".jpg").getName();
@@ -48,6 +55,9 @@ public class UploadServlet extends HttpServlet {
             }
         }
         
+        if(!authCodeOK) {
+            base64 = "";
+        }
         String json = "{\"title\":\"%s\", \"ofileName\":\"%s\", \"fileName\":\"%s\", \"bytes\":\"%d\", \"base64\":\"%s\"}";
         json = String.format(json, title, ofileName, fileName, bytes, base64);
         out.println(json);
