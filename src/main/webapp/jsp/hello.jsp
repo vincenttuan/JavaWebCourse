@@ -33,5 +33,10 @@
         
         <%=new Lotto().getNumber() %>
         
+        <%
+            Lotto lotto = new Lotto();
+            int num = lotto.getNumber();
+            out.print(num);
+        %>
     </body>
 </html>
