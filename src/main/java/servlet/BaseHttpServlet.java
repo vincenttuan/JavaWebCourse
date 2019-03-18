@@ -10,9 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "BaseHttpServlet", urlPatterns = {"/servlet/MyHttpServlet"})
+@WebServlet(name = "BaseHttpServlet", urlPatterns = {"/servlet/MyHttpServlet"}, loadOnStartup = 1)
 public class BaseHttpServlet extends HttpServlet {
 
+    @Override
+    public void init() throws ServletException {
+        System.out.println("init()");
+    }
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
