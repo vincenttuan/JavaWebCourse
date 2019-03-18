@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Base64;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
@@ -116,6 +117,35 @@ public class Util {
         g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null);
         g.dispose();
         return scaledBI;
+    }
+    
+    public static BufferedImage getAuthImg(String authCode) {
+        // 建立圖像暫存區
+        BufferedImage img = new BufferedImage(80, 30, BufferedImage.TYPE_INT_BGR);
+        // 建立畫布
+        Graphics g = img.getGraphics();
+        // 設定顏色
+        g.setColor(Color.YELLOW);
+        // 塗滿背景
+        g.fillRect(0, 0, 80, 30);
+        // 設定顏色
+        g.setColor(Color.BLACK);
+        // 設定自型
+        g.setFont(new Font("新細明體", Font.PLAIN, 30));
+        // 繪字串
+        g.drawString(authCode, 10, 23); // code, x, y
+        
+        // 干擾線條
+        Random random = new Random();
+        g.setColor(Color.BLUE);
+        for (int i = 0; i < 10; i++) {
+            int x = random.nextInt(80);
+            int y = random.nextInt(30);
+            int x2 = random.nextInt(80);
+            int y2 = random.nextInt(30);
+            g.drawLine(x, y, x2, y2);
+        }
+        return img;
     }
 
 }

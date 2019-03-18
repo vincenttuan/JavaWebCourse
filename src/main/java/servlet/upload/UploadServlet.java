@@ -1,9 +1,13 @@
 package servlet.upload;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -56,7 +60,16 @@ public class UploadServlet extends HttpServlet {
         }
         
         if(!authCodeOK) {
-            base64 = "";
+            // 產生 Error 圖樣
+            BufferedImage image = Util.getAuthImg("Error");
+            // 建立 ByteArrayOutputStream 容器(baos)
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            // 將 image 物件資料存入 ByteArrayOutputStream 容器(baos)
+            ImageIO.write(image, "jpg", baos);
+            // 將 byte[] 轉 InputStream
+            InputStream is = new ByteArrayInputStream(baos.toByteArray());
+            // 產生 base64 碼
+            base64 = Util.getBase64(is);
         }
         String json = "{\"title\":\"%s\", \"ofileName\":\"%s\", \"fileName\":\"%s\", \"bytes\":\"%d\", \"base64\":\"%s\"}";
         json = String.format(json, title, ofileName, fileName, bytes, base64);
