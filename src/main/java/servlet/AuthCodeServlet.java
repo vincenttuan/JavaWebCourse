@@ -22,6 +22,9 @@ public class AuthCodeServlet extends HttpServlet {
         String authCode = String.format("%04d", new Random().nextInt(1000));
         System.out.println("authCode = " + authCode);
         
+        //將驗證碼保留在session中，便於以後驗證
+        req.getSession().setAttribute("authCode", authCode);  
+        
         try {
             //發送/寫入圖片資料  
             ImageIO.write(getAuthImg(authCode), "JPEG", resp.getOutputStream());
