@@ -46,14 +46,15 @@ public class AuthCodeServlet extends HttpServlet {
         // 繪字串
         g.drawString(authCode, 10, 23); // code, x, y
         
-        // 干擾素
+        // 干擾線條
         Random random = new Random();
-        for (int i = 0; i < 15; i++) {
+        g.setColor(Color.BLUE);
+        for (int i = 0; i < 10; i++) {
             int x = random.nextInt(80);
             int y = random.nextInt(30);
             int x2 = random.nextInt(80);
             int y2 = random.nextInt(30);
-            g.drawLine(x, y, x + x2, y + y2);
+            g.drawLine(x, y, x2, y2);
         }
         return img;
     }
