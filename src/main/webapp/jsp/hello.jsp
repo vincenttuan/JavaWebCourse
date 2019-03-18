@@ -11,7 +11,6 @@
             return 777;
         }
     }
-    
 %>
 <html>
     <head>
@@ -36,7 +35,7 @@
         <%
             Lotto lotto = new Lotto();
             int num = lotto.getNumber();
-            out.print(num);
+            out.print(obj);
         %>
     </body>
 </html>
