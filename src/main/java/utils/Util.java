@@ -119,6 +119,7 @@ public class Util {
         return scaledBI;
     }
     
+    // 產生暫存圖
     public static BufferedImage getAuthImg(String authCode) {
         // 建立圖像暫存區
         BufferedImage img = new BufferedImage(80, 30, BufferedImage.TYPE_INT_BGR);
