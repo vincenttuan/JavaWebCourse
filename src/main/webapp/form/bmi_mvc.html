@@ -24,12 +24,13 @@
         </script>
     </head>
     <body style="padding: 10px">
-        <form class="pure-form" method="post">
+        <form class="pure-form" method="post" action="/JavaWebCourse/mvc/controller/BMIController">
             <fieldset>
-                <legend>BMI MVC (Ajax)</legend>
+                <legend>BMI MVC</legend>
                 <input type="number" placeholder="請輸入身高" name="height" id="height"><p>
                 <input type="number" placeholder="請輸入體重" name="weight" id="weight"><p>
-                <button type="button" class="pure-button pure-button-primary" onclick="doPost()">計算</button>
+                <button type="submit" class="pure-button pure-button-primary">計算</button>
+                <!--<button type="button" class="pure-button pure-button-primary" onclick="doPost()">Ajax 計算</button>-->
             </fieldset>
         </form>
         <div id="demo"></div>
