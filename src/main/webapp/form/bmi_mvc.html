@@ -9,8 +9,10 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log(this.responseText);
-                        document.getElementById("demo").innerHTML = this.responseText;
+                        content = this.responseText.trim();
+                        console.log(content);
+                        var obj = JSON.parse(content);
+                        document.getElementById("bmi").value = obj.bmi;
                     }
                 };
                 xhttp.open("POST", "/JavaWebCourse/mvc/controller/BMIController", true);
@@ -29,8 +31,9 @@
                 <legend>BMI MVC</legend>
                 <input type="number" placeholder="請輸入身高" name="height" id="height"><p>
                 <input type="number" placeholder="請輸入體重" name="weight" id="weight"><p>
+                <input type="number" name="bmi" id="bmi" readonly><p>
                 <button type="submit" class="pure-button pure-button-primary">計算</button>
-                <!--<button type="button" class="pure-button pure-button-primary" onclick="doPost()">Ajax 計算</button>-->
+                <button type="button" class="pure-button pure-button-primary" onclick="doPost()">Ajax 計算</button>
             </fieldset>
         </form>
         <div id="demo"></div>
