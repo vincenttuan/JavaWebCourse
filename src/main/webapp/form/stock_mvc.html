@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <title>Stock MVC</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function doPost() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        content = this.responseText.trim();
+                        console.log(content);
+                        var obj = JSON.parse(content);
+                        document.getElementById("price").value = obj.price;
+                    }
+                };
+                xhttp.open("POST", "/JavaWebCourse/mvc/controller/StockController", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var symbol = document.getElementById("symbol").value;
+                var args = "symbol=" + symbol;
+                console.log(args)
+                xhttp.send(args);
+            }
+        </script>
+    </head>
+    <body style="padding: 10px">
+        <form class="pure-form" method="post" action="/JavaWebCourse/mvc/controller/BMIController">
+            <fieldset>
+                <legend>Stock MVC</legend>
+                <input type="text" placeholder="請輸入商品代號" name="symbol" id="symbol"><p>
+                <input type="number" name="price" id="price" readonly><p>
+                <button type="button" class="pure-button pure-button-primary" onclick="doPost()">Ajax 傳送</button>
+            </fieldset>
+        </form>
+        <div id="demo"></div>
+    </body>
+</html>

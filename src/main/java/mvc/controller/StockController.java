@@ -10,28 +10,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mvc.model.BMIModel;
+import mvc.model.StockModel;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
-@WebServlet("/mvc/controller/BMIController")
-public class BMIController extends HttpServlet {
+@WebServlet("/mvc/controller/StockController")
+public class StockController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        double height = Double.parseDouble(req.getParameter("height"));
-        double weight = Double.parseDouble(req.getParameter("weight"));
-
+        String symbol = req.getParameter("symbol");
+        
         // Model
-        BMIModel bm = new BMIModel(height, weight);
+        StockModel sm = new StockModel(symbol);
         
         // bm 轉 json
-        String json = new Gson().toJson(bm);
+        String json = new Gson().toJson(sm);
         
         // View
-        req.setAttribute("bmi", bm);
         req.setAttribute("json", json);
         // 傳導到指定目的
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/bmi_view.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/stock_view.jsp");
         rd.forward(req, resp);
 
     }
