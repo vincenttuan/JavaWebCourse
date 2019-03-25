@@ -29,12 +29,34 @@ public class UserDAO {
         return users.stream().filter(name -> name.contains(keyword)).collect(Collectors.toList());
     }
     
+    // 新增
+    public void create(String name) {
+        users.add(name);
+    }
+    
+    // 修改
+    public void update(int id, String newName) {
+        users.set(id, newName);
+    }
+    
+    // 刪除
+    public void delete(int id) {
+        users.remove(id);
+    }
+    
     
     // 測試用(模擬 RestUser Servlet 的使用)
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
         System.out.println(dao.queryAll());
         System.out.println(dao.get(2));
+        System.out.println(dao.query("java"));
+        dao.create("C#");
+        System.out.println(dao.queryAll());
+        dao.update(4, "VB.Net");
+        System.out.println(dao.queryAll());
+        dao.delete(4);
+        System.out.println(dao.queryAll());
     }
     
 }
