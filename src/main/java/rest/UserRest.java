@@ -103,7 +103,7 @@ public class UserRest extends HttpServlet {
         // resource
 
         private Pattern regExAllPattern = Pattern.compile("/users");
-        private Pattern regExIdPattern = Pattern.compile("/user/([0-9]*)");
+        private Pattern regExIdPattern  = Pattern.compile("/user/([0-9]*)");
 
         private int id = -1;
 
@@ -114,9 +114,8 @@ public class UserRest extends HttpServlet {
             // Check for ID case first, since the All pattern would also match
             matcher = regExIdPattern.matcher(pathInfo);
             if (matcher.find()) {
-                try {
+                if(matcher.group(1).length() > 0) {
                     id = Integer.parseInt(matcher.group(1));
-                } catch (Exception e) {
                 }
                 return;
             }
