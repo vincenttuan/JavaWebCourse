@@ -2,7 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import dao.UserDAO;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import java.util.regex.Pattern;
@@ -79,7 +81,15 @@ public class UserRest extends HttpServlet {
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doHandler(request, response);
+        response.setContentType("text/plain;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        
+        String args = new BufferedReader(new InputStreamReader(request.getInputStream())).readLine();
+        String[] argsArray = args.split("&");
+        int id = Integer.parseInt(argsArray[0].split("=")[1]);
+        String newName = argsArray[1].split("=")[1];
+        dao.update(id, newName);
+        out.print("Update OK");
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)

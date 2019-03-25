@@ -50,6 +50,24 @@
                 var args = "username=" + username;
                 xhttp.send(args);
             }
+            
+            function updateUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var path = "/JavaWebCourse/rest/user/";
+                console.log(path);
+                xhttp.open("PUT", path, true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var id = document.getElementById("update_id").value;
+                var newname = document.getElementById("update_newname").value;
+                var args = "id=" + id + "&newName=" + newname;
+                xhttp.send(args);
+            }
         </script>
     </head>
     <body style="padding: 10px">
@@ -61,7 +79,11 @@
                 <button type="button" class="pure-button pure-button-primary" onclick="queryAllUser()" >查詢全部</button><p>
                 
                 <input type="text" placeholder="請輸入名字" name="username" id="username">
-                <button type="button" class="pure-button pure-button-primary" onclick="createUser()">新增</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="createUser()">新增</button><p>
+                
+                <input type="number" placeholder="請輸入id" name="update_id" id="update_id">    
+                <input type="text" placeholder="請輸入名字" name="update_newname" id="update_newname">
+                <button type="button" class="pure-button pure-button-primary" onclick="updateUser()">修改</button><p>
                 
             </fieldset>
         </form>
