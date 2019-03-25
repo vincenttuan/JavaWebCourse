@@ -15,6 +15,7 @@
                 };
                 var id = document.getElementById("id").value;
                 var path = "/JavaWebCourse/rest/user/" + id;
+                console.log(path);
                 xhttp.open("GET", path, true);
                 xhttp.send();
             }
