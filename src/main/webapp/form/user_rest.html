@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <title>User REST</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function getUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var id = document.getElementById("id").value;
+                var path = "/JavaWebCourse/rest/user/" + id;
+                xhttp.open("GET", path, true);
+                xhttp.send();
+            }
+            
+            function queryAllUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var path = "/JavaWebCourse/rest/users";
+                xhttp.open("GET", path, true);
+                xhttp.send();
+            }
+        </script>
+    </head>
+    <body style="padding: 10px">
+        <form class="pure-form">
+            <fieldset>
+                <legend>User REST</legend>
+                <input type="number" placeholder="請輸入id" name="id" id="id">
+                <button type="button" class="pure-button pure-button-primary" onclick="getUser()">查詢</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="queryAllUser()">查詢全部</button><p>
+            </fieldset>
+        </form>
+        <div id="result"></div>
+    </body>
+</html>
