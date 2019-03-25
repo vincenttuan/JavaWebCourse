@@ -59,14 +59,30 @@
                         document.getElementById("result").innerText = this.responseText;
                     }
                 };
-                var path = "/JavaWebCourse/rest/user/";
+                var id = document.getElementById("update_id").value;
+                var newname = document.getElementById("update_newname").value;
+                var path = "/JavaWebCourse/rest/user/" + id;
                 console.log(path);
                 xhttp.open("PUT", path, true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                var id = document.getElementById("update_id").value;
-                var newname = document.getElementById("update_newname").value;
-                var args = "id=" + id + "&newName=" + newname;
+                var args = "newName=" + newname;
                 xhttp.send(args);
+            }
+            
+            function deleteUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var id = document.getElementById("id").value;
+                var path = "/JavaWebCourse/rest/user/" + id;
+                console.log(path);
+                xhttp.open("DELETE", path, true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send();
             }
         </script>
     </head>
@@ -76,7 +92,8 @@
                 <legend>User REST</legend>
                 <input type="number" placeholder="請輸入id" name="id" id="id">
                 <button type="button" class="pure-button pure-button-primary" onclick="getUser()">查詢</button>
-                <button type="button" class="pure-button pure-button-primary" onclick="queryAllUser()" >查詢全部</button><p>
+                <button type="button" class="pure-button pure-button-primary" onclick="queryAllUser()" >查詢全部</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="deleteUser()">刪除</button><p>
                 
                 <input type="text" placeholder="請輸入名字" name="username" id="username">
                 <button type="button" class="pure-button pure-button-primary" onclick="createUser()">新增</button><p>

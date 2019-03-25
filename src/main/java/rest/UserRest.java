@@ -83,18 +83,31 @@ public class UserRest extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/plain;charset=utf-8");
         PrintWriter out = response.getWriter();
+        try {
+            RestRequest restRequest = new RestRequest(request.getPathInfo());
+            String args = new BufferedReader(new InputStreamReader(request.getInputStream())).readLine();
+            String newName = args.split("=")[1];
+            dao.update(restRequest.getId(), newName);
+            out.print("Update OK");
+        } catch (ServletException e) {
+            e.printStackTrace();
+            out.println(e.toString());
+        }
         
-        String args = new BufferedReader(new InputStreamReader(request.getInputStream())).readLine();
-        String[] argsArray = args.split("&");
-        int id = Integer.parseInt(argsArray[0].split("=")[1]);
-        String newName = argsArray[1].split("=")[1];
-        dao.update(id, newName);
-        out.print("Update OK");
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doHandler(request, response);
+        response.setContentType("text/plain;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        try {
+            RestRequest restRequest = new RestRequest(request.getPathInfo());
+            dao.delete(restRequest.getId());
+            out.print("Delete OK");
+        } catch (ServletException e) {
+            e.printStackTrace();
+            out.println(e.toString());
+        }
     }
 
     // implement remaining HTTP actions here
