@@ -5,7 +5,13 @@
         <meta http-equiv="expires" content="0">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
         <title>Auth Code</title>
-        
+        <script>
+            function reloadImage(img) {
+                // 需要加上 Math.random() 來規避 js cache，否則圖片出不來。
+                img.src = img.src.split('?')[0] + "?" + Math.random();
+                console.log(img.src);
+            }
+        </script>
     </head>
     <body style="padding: 20px">
         <form class="pure-form pure-form-stacked"
@@ -14,7 +20,7 @@
             <fieldset>
                 <legend>Auth Code</legend>
                 驗證碼 : <input type="text" name="myAuthCode" />
-                <img src="/JavaWebCourse/servlet/AuthCodeServlet">
+                <img src="/JavaWebCourse/servlet/AuthCodeServlet" onclick="reloadImage(this)" style="cursor: help;" title="按我一下重新取得驗證碼">
                 <br>
                 <input type="submit" value="Submit" />
             </fieldset>
