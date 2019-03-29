@@ -9,4 +9,3 @@ public class MyApplication extends ResourceConfig{
         
     }
 }
-
