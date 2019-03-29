@@ -47,7 +47,6 @@ public class UserRS {
     @PUT
     @Path("/{id}")
     public String update(@PathParam("id") int id, @FormParam("newName") String newName) {
-        // args -> newName=bob
         dao.update(id, newName);
         return "Update OK";
     }
