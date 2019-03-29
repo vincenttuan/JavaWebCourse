@@ -48,8 +48,18 @@ public class UserRS {
     @Path("/{id}")
     public String update(@PathParam("id") int id, String args) {
         // args -> newName=bob
-        dao.update(id, args.split("=")[1]);
+        String newName = getValue(args, "newName");
+        dao.update(id, newName);
         return "Update OK";
+    }
+    
+    private String getValue(String args, String name) {
+        for(String arg : args.split("&")) {
+            if(arg.split("=")[0].equals(name)) {
+                return arg.split("=")[1];
+            }
+        }
+        return null;
     }
     
     
