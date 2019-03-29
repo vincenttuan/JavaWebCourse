@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <title>User REST (Jersey)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function getUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var id = document.getElementById("id").value;
+                var path = "/JavaWebCourse/jrest/user/" + id;
+                console.log(path);
+                xhttp.open("GET", path, true);
+                xhttp.send();
+            }
+            
+            function queryAllUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var path = "/JavaWebCourse/jrest/users";
+                console.log(path);
+                xhttp.open("GET", path, true);
+                xhttp.send();
+            }
+            
+            function createUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var path = "/JavaWebCourse/jrest/user/";
+                console.log(path);
+                xhttp.open("POST", path, true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var username = document.getElementById("username").value;
+                var args = "username=" + username;
+                xhttp.send(args);
+            }
+            
+            function updateUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var id = document.getElementById("update_id").value;
+                var newname = document.getElementById("update_newname").value;
+                var path = "/JavaWebCourse/jrest/user/" + id;
+                console.log(path);
+                xhttp.open("PUT", path, true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                var args = "newName=" + newname;
+                xhttp.send(args);
+            }
+            
+            function deleteUser() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("result").innerText = this.responseText;
+                    }
+                };
+                var id = document.getElementById("id").value;
+                var path = "/JavaWebCourse/jrest/user/" + id;
+                console.log(path);
+                xhttp.open("DELETE", path, true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send();
+            }
+        </script>
+    </head>
+    <body style="padding: 10px">
+        <form class="pure-form">
+            <fieldset>
+                <legend>User REST (Jersey)</legend>
+                <input type="number" placeholder="請輸入id" name="id" id="id">
+                <button type="button" class="pure-button pure-button-primary" onclick="getUser()">查詢</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="queryAllUser()" >查詢全部</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="deleteUser()">刪除</button><p>
+                
+                <input type="text" placeholder="請輸入名字" name="username" id="username">
+                <button type="button" class="pure-button pure-button-primary" onclick="createUser()">新增</button><p>
+                
+                <input type="number" placeholder="請輸入id" name="update_id" id="update_id">    
+                <input type="text" placeholder="請輸入名字" name="update_newname" id="update_newname">
+                <button type="button" class="pure-button pure-button-primary" onclick="updateUser()">修改</button><p>
+                
+            </fieldset>
+        </form>
+        <div id="result"></div>
+    </body>
+</html>
