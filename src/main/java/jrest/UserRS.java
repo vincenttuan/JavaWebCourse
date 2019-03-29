@@ -46,9 +46,8 @@ public class UserRS {
     
     @PUT
     @Path("/{id}")
-    public String update(@PathParam("id") int id, String args) {
+    public String update(@PathParam("id") int id, @FormParam("newName") String newName) {
         // args -> newName=bob
-        String newName = getValue(args, "newName");
         dao.update(id, newName);
         return "Update OK";
     }
