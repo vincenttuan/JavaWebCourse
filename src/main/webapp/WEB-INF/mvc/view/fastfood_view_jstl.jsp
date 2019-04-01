@@ -1,10 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    String[] food_titles = (String[])session.getAttribute("food_titles");
-    String[] food_prices = (String[])session.getAttribute("food_prices"); 
-    boolean firsttime = Boolean.parseBoolean(session.getAttribute("firsttime").toString()); 
-    String sessionId = session.getId();
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!--
+    JSTL 標準標籤庫
+    http://www.runoob.com/jsp/jsp-jstl.html
+-->
 <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
@@ -15,8 +14,8 @@
     <body style="padding: 10px">
         <form class="pure-form" method="post" action="/JavaWebCourse/servlet/BMIServlet">
             <fieldset>
-                <legend>Fastfood ShoppingCar (<%=firsttime %>)</legend>
-                <font size=1>session id = <%=sessionId %></font><p>
+                <legend>Fastfood ShoppingCar (${sessionScope.firsttime })</legend>
+                <font size=1>session id = ${pageContext.session.id}</font><p>
                 <table class="pure-table pure-table-bordered">
                     <thead>
                         <tr>
@@ -26,13 +25,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%for(int i=0;i<food_titles.length;i++){%>
+                        <c:forEach var="food" items="${sessionScope.foods}" varStatus="counter">
                         <tr>
-                            <td><%=i+1 %></td>
-                            <td><%=food_titles[i] %></td>
-                            <td><%=food_prices[i] %></td>
+                            <td>${counter.count}</td>
+                            <td>${food.name}</td>
+                            <td>${food.price}</td>
                         </tr>
-                        <%}%>
+                        </c:forEach>
                     </tbody>
                 </table>
                 <p>
