@@ -28,10 +28,10 @@ public class Fastfood_JSTL_Controller extends HttpServlet {
         if(session == null) {
             out.println("請先消費");
         } else {
-//            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/fastfood_view.jsp");
-//            rd.forward(req, resp);
+           RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/fastfood_view_jstl.jsp");
+           rd.forward(req, resp);
         }
-        out.print(session.getAttribute("fastfood"));
+        //out.print(session.getAttribute("fastfood"));
     }
 
     @Override
@@ -55,10 +55,9 @@ public class Fastfood_JSTL_Controller extends HttpServlet {
         }
         
         session.setAttribute("fastfood", fastfood);
-        out.print(session.getAttribute("fastfood"));
-        
-//        RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/fastfood_view.jsp");
-//        rd.forward(req, resp);
+        //out.print(session.getAttribute("fastfood"));
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/fastfood_view_jstl.jsp");
+        rd.forward(req, resp);
     }
 
 }

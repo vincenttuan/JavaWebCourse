@@ -14,7 +14,7 @@
     <body style="padding: 10px">
         <form class="pure-form" method="post" action="/JavaWebCourse/servlet/BMIServlet">
             <fieldset>
-                <legend>Fastfood ShoppingCar (${sessionScope.fastfood.firsttime })</legend>
+                <legend>Fastfood ShoppingCar JSTL (${sessionScope.fastfood.firsttime })</legend>
                 <font size=1>session id = ${pageContext.session.id}</font><p>
                 <table class="pure-table pure-table-bordered">
                     <thead>
