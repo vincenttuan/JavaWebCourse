@@ -25,8 +25,9 @@ public class FastfoodController extends HttpServlet {
         HttpSession session = req.getSession(false);
         if(session == null) {
             out.println("請先消費");
+        } else {
+            out.println("您的 session id = " + session.getId());
         }
-        out.println("您的 session id = " + session.getId());
     }
 
     @Override
