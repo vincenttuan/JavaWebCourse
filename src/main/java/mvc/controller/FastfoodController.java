@@ -26,15 +26,8 @@ public class FastfoodController extends HttpServlet {
         if(session == null) {
             out.println("請先消費");
         } else {
-            out.println("您的 session id = " + session.getId());
-            String[] food_titles = (String[])session.getAttribute("food_titles");
-            String[] food_prices = (String[])session.getAttribute("food_prices");
-            out.println(food_titles[0]);
-            out.println(food_titles[1]);
-            out.println(food_titles[2]);
-            out.println(food_prices[0]);
-            out.println(food_prices[1]);
-            out.println(food_prices[2]);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/fastfood_view.jsp");
+            rd.forward(req, resp);
         }
     }
 
@@ -48,19 +41,17 @@ public class FastfoodController extends HttpServlet {
         HttpSession session = req.getSession(true);
         if(session.isNew()) {
             out.println("您是第一次進來");
+            session.setAttribute("firsttime", true);
+        } else {
+            session.setAttribute("firsttime", false);
         }
-        out.println("您的 session id = " + session.getId());
-        
         String[] food_titles = req.getParameterValues("food_title");
         String[] food_prices = req.getParameterValues("food_price");
-        out.println(food_titles[0]);
-        out.println(food_titles[1]);
-        out.println(food_titles[2]);
-        out.println(food_prices[0]);
-        out.println(food_prices[1]);
-        out.println(food_prices[2]);
         session.setAttribute("food_titles", food_titles);
         session.setAttribute("food_prices", food_prices);
+        
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/mvc/view/fastfood_view.jsp");
+        rd.forward(req, resp);
     }
 
 }
