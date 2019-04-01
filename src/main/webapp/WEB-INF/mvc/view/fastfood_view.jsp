@@ -3,7 +3,6 @@
     String[] food_titles = (String[])session.getAttribute("food_titles");
     String[] food_prices = (String[])session.getAttribute("food_prices"); 
     boolean firsttime = Boolean.parseBoolean(session.getAttribute("firsttime").toString()); 
-    
 %>
 <html>
     <head>
