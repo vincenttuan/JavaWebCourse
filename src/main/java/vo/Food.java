@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Food implements Serializable{
     private String title;
-    private String price;
+    private String amount;
 
-    public Food(String title, String price) {
+    public Food(String title, String amount) {
         this.title = title;
-        this.price = price;
+        this.amount = amount;
     }
 
     public String getTitle() {
@@ -19,17 +19,17 @@ public class Food implements Serializable{
         this.title = title;
     }
 
-    public String getPrice() {
-        return price;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
     @Override
     public String toString() {
-        return "Food{" + "title=" + title + ", price=" + price + '}';
+        return "Food{" + "title=" + title + ", amount=" + amount + '}';
     }
     
     
