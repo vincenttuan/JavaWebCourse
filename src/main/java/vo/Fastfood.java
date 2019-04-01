@@ -1,9 +1,10 @@
 package vo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fastfood {
+public class Fastfood implements Serializable {
     private boolean firsttime;
     private List<Food> foods = new ArrayList<>();
     
@@ -21,6 +22,11 @@ public class Fastfood {
 
     public void addFood(Food food) {
         foods.add(food);
+    }
+
+    @Override
+    public String toString() {
+        return "Fastfood{" + "firsttime=" + firsttime + ", foods=" + foods + '}';
     }
     
 }

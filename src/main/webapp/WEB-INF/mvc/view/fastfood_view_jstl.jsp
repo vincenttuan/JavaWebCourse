@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="food" items="${sessionScope.fastfood}" varStatus="counter">
+                        <c:forEach var="food" items="${sessionScope.fastfood.foods}" varStatus="counter">
                         <tr>
                             <td>${counter.count}</td>
                             <td>${food.title}</td>

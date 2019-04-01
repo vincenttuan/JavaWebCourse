@@ -1,6 +1,8 @@
 package vo;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable{
     private String title;
     private String price;
 
@@ -24,5 +26,11 @@ public class Food {
     public void setPrice(String price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Food{" + "title=" + title + ", price=" + price + '}';
+    }
+    
     
 }
