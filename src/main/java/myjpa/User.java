@@ -40,7 +40,8 @@ public class User implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if(name != null)
+            this.name = name;
     }
 
     public int getAge() {
@@ -48,7 +49,8 @@ public class User implements Serializable {
     }
 
     public void setAge(int age) {
-        this.age = age;
+        if(age >= 0)
+            this.age = age;
     }
 
     @Override

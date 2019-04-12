@@ -5,6 +5,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -39,6 +40,20 @@ public class JPA_UserRS {
         if(user != null) {
             controller.delete(user);
             return "delete OK";
+        } else {
+            return "No data";
+        }
+    }
+    
+    @PUT
+    @Path("/{id}")
+    public String update(@PathParam("id") long id, @FormParam("name") String name, @FormParam("age") int age) {
+        User user = controller.findById(id);
+        if(user != null) {
+            user.setName(name);
+            user.setAge(age);
+            controller.update(user);
+            return "Update OK";
         } else {
             return "No data";
         }
