@@ -17,7 +17,7 @@ public class JPA_UserServlet extends HttpServlet {
         Gson gson = new Gson();
         PrintWriter out = resp.getWriter();
         String method = req.getParameter("method");
-        
+        if(method == null) method = "";
         switch(method) {
             case "save": // ?method=save&name=Joe&age=28
                 String name = req.getParameter("name");
