@@ -1,7 +1,9 @@
 package myjpa;
 
 import com.google.gson.Gson;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -18,5 +20,14 @@ public class JPA_UserRS {
     @Path("/all")
     public String queryAll() {
         return new Gson().toJson(controller.queryAll());
+    }
+    
+    @POST
+    public String create(@FormParam("name") String name, @FormParam("age") int age) {
+        User user = new User();
+        user.setName(name);
+        user.setAge(age);
+        controller.save(user);
+        return "Create OK";
     }
 }
