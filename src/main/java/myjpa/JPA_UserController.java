@@ -10,21 +10,21 @@ public class JPA_UserController {
     private  EntityManager em = 
             JPAUtil.getEntityManagerFactory().createEntityManager();
     
-    public void save(User user, PrintWriter out) {
+    public void save(User user) {
         EntityTransaction etx = em.getTransaction();
         etx.begin();
         em.persist(user);
         etx.commit();
     }
     
-    public void update(User user, PrintWriter out) {
+    public void update(User user) {
         EntityTransaction etx = em.getTransaction();
         etx.begin();
         em.merge(user);
         etx.commit();
     }
     
-    public void delete(User user, PrintWriter out) {
+    public void delete(User user) {
         EntityTransaction etx = em.getTransaction();
         etx.begin();
         em.remove(em.merge(user));
