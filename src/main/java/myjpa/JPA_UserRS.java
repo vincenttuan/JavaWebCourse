@@ -1,6 +1,7 @@
 package myjpa;
 
 import com.google.gson.Gson;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,5 +30,17 @@ public class JPA_UserRS {
         user.setAge(age);
         controller.save(user);
         return "Create OK";
+    }
+    
+    @DELETE
+    @Path("/{id}")
+    public String delete(@PathParam("id") long id) {
+        User user = controller.findById(id);
+        if(user != null) {
+            controller.delete(user);
+            return "delete OK";
+        } else {
+            return "No data";
+        }
     }
 }
