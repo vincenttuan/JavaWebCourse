@@ -9,8 +9,9 @@ public class JPA_Console {
         
     public static void main(String[] args) {
 
-        User user = new User("Vincent", 30);
-        create(user);
+        create(new User("Vincent", 30));
+        create(new User("Anita", 20));
+        create(new User("John", 10));
         
         JPAUtil.shutdown();
     }
@@ -27,6 +28,6 @@ public class JPA_Console {
         etx.commit();
         
         System.out.println("1.新增完畢成功");
-        em.close();
+        //em.close();
     }
 }
