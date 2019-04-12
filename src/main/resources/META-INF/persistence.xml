@@ -9,9 +9,10 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/demo"/>
             <property name="javax.persistence.jdbc.user" value="app"/>
             <property name="javax.persistence.jdbc.password" value="1234"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+<!--        <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />-->
         </properties>
     </persistence-unit>
 </persistence>
