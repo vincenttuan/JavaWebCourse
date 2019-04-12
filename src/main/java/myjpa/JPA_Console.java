@@ -5,16 +5,17 @@ import javax.persistence.EntityTransaction;
 
 public class JPA_Console {
     
+    private static EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        
     public static void main(String[] args) {
 
         User user = new User("Vincent", 30);
         create(user);
-
+        
         JPAUtil.shutdown();
     }
 
     public static void create(User user) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         
         // 進入交易模式
         EntityTransaction etx = em.getTransaction();
