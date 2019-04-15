@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import myjpa.JPAUtil;
 import myjpa.User;
 import okhttp3.OkHttpClient;
@@ -34,10 +35,14 @@ public class TWIIBean {
     
     public static void main(String[] args) throws IOException {
         List<TWII> list = toTWIIList_java8(csv());
-        System.out.println(list);
-        create(list);
+        //System.out.println(list);
+        //create(list);
+        List qlist = query(10.0, 5, 1);
+        System.out.println(qlist.size() + "筆");
+        System.out.println(qlist);
     }
     
+    // 匯入
     public static void create(List<TWII> list) {
 
         // 進入交易模式
@@ -56,6 +61,17 @@ public class TWIIBean {
         //em.close();
     }
     
+    // 查詢
+    public static List query(double yield, double pe, double pb) {
+        Query query = em.createQuery("SELECT twii FROM TWII twii WHERE twii.yield > :yield AND twii.pe < :pe AND twii.pb < :pb");
+        query.setParameter("yield", yield);
+        query.setParameter("pe", pe);
+        query.setParameter("pb", pb);
+        List list = query.getResultList();
+        return list;
+    }
+    
+    // csv 轉 List
     public static List csv() throws IOException {
         String url = "http://localhost:8080/JavaWebCourse/files/BWIBBU_d.csv";
         TWIIBean twiib = new TWIIBean();
@@ -70,6 +86,7 @@ public class TWIIBean {
         return list;
     }
     
+    // List<?> 轉 List<TWII>
     private static List<TWII> toTWIIList(List list) {
         List<TWII> twiiList = new ArrayList<>();
         for(Object data : list) {
@@ -85,6 +102,7 @@ public class TWIIBean {
         return twiiList;
     }
     
+    // List<?> 轉 List<TWII> for java 8
     private static List<TWII> toTWIIList_java8(List list) {
         List twiiList = new ArrayList<>();
         list.stream().map((data) -> {
@@ -102,6 +120,7 @@ public class TWIIBean {
         return twiiList;
     }
     
+    // for json (homework)
     public static void json() throws IOException{
         String url = "http://localhost:8080/JavaWebCourse/files/BWIBBU_d.json";
         TWIIBean twiib = new TWIIBean();
