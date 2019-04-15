@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TWIIServlet extends HttpServlet {
     @EJB
     private TWIIBean tWIIBean;
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
