@@ -1,9 +1,10 @@
 package twii;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,7 +25,24 @@ public class TWIIBean {
     }
 
     public static void main(String[] args) throws IOException {
-        String url = "http://www.twse.com.tw/exchangeReport/BWIBBU_d?response=csv&date=20190415&selectType=ALL";
+        //csv();
+        json();
+    }
+
+    public static void json() throws IOException{
+        String url = "http://localhost:8080/JavaWebCourse/files/BWIBBU_d.json";
+        TWIIBean twiib = new TWIIBean();
+        String jsonLine = twiib.run(url);
+        System.out.println(jsonLine);
+        GsonBuilder builder = new GsonBuilder();
+        JsonElement jelement = new JsonParser().parse(jsonLine);
+        //JsonObject jobject = jelement.getAsJsonObject();
+        System.out.println(jelement.getAsJsonObject().getAsJsonArray("data"));
+        
+    }
+
+    public static void csv() throws IOException {
+        String url = "http://localhost:8080/JavaWebCourse/files/BWIBBU_d.csv";
         TWIIBean twiib = new TWIIBean();
         String[] data = twiib.run(url).split("\n");
         System.out.println(data.length);
@@ -40,6 +58,6 @@ public class TWIIBean {
                 .filter(n -> Double.parseDouble(n[4]) < pe)
                 .filter(n -> Double.parseDouble(n[5]) < pb)
                 .forEach(n -> System.out.println(n[0] + " " + n[1] + " " + n[2] + " " + n[3] + " " + n[4] + " " + n[5] + " " + n[7]));
-        
+
     }
 }
