@@ -1,5 +1,6 @@
 package twii;
 
+
 public class TWII {
     private int id;
     private String stockNo;
