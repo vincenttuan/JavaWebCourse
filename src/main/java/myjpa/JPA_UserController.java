@@ -43,7 +43,7 @@ public class JPA_UserController {
     }
     
     public List queryAll() {
-        Query query = em.createNativeQuery("Select id, name, age from APP.T_USER", User.class);
+        Query query = em.createNativeQuery("Select id, name, age from T_USER", User.class);
         List list = query.getResultList();
         return list;
     }
