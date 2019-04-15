@@ -45,6 +45,7 @@ public class TWIIBean {
         // 交易開始
         etx.begin();
         // 交易內容
+        em.createNativeQuery("DELETE From APP.T_TWII").executeUpdate();
         for(TWII twii : list) {
             em.persist(twii);
         }
