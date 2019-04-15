@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import myjpa.JPAUtil;
+import myjpa.User;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -25,12 +29,32 @@ public class TWIIBean {
             return response.body().string();
         }
     }
-
+    
+    private static EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+    
     public static void main(String[] args) throws IOException {
         List<TWII> list = toTWIIList_java8(csv());
         System.out.println(list);
+        create(list);
     }
+    
+    public static void create(List<TWII> list) {
 
+        // 進入交易模式
+        EntityTransaction etx = em.getTransaction();
+        // 交易開始
+        etx.begin();
+        // 交易內容
+        for(TWII twii : list) {
+            em.persist(twii);
+        }
+        // 交易確認
+        etx.commit();
+
+        System.out.println("1.新增完畢成功");
+        //em.close();
+    }
+    
     public static List csv() throws IOException {
         String url = "http://localhost:8080/JavaWebCourse/files/BWIBBU_d.csv";
         TWIIBean twiib = new TWIIBean();
