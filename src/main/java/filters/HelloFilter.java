@@ -21,7 +21,11 @@ public class HelloFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("doFilter() HelloFilter");
-        response.getWriter().print("HelloFilter");
+        if(request.getParameter("pass") == null) {
+            response.getWriter().print("Closed !");
+        } else {
+            chain.doFilter(request, response);
+        }
     }
 
     @Override
