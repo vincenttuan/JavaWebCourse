@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 @WebFilter("/*")
 public class PerformanceFilter implements Filter {
@@ -21,7 +22,7 @@ public class PerformanceFilter implements Filter {
         long begin = System.currentTimeMillis();
         chain.doFilter(request, response);
         long end = System.currentTimeMillis();
-        System.out.println(chain.getClass() + " : " + (end - begin) + " ms");
+        System.out.println(((HttpServletRequest)request).getRequestURI() + " : " + (end - begin) + " ms");
     }
 
     @Override
