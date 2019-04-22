@@ -18,6 +18,7 @@ public class SessionServletStatus extends HttpServlet{
             resp.getWriter().print("status = logout");
         } else {
             resp.getWriter().print("status = login");
+            resp.getWriter().print("<br>login session id:" + session.getId());
         }
     }
     

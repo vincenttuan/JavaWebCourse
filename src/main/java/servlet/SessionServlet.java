@@ -17,8 +17,10 @@ public class SessionServlet extends HttpServlet{
         resp.getWriter().print("create Session ");
         if(session.isNew()) {
             System.out.println("New:" + session.getId());
+            resp.getWriter().print("<br>New session id:" + session.getId());
+        } else {
+            resp.getWriter().print("<br>session id:" + session.getId());
         }
-        resp.getWriter().print("id:" + session.getId());
     }
     
     @Override
@@ -28,7 +30,7 @@ public class SessionServlet extends HttpServlet{
             System.out.println("Del:" + session.getId());
             session.invalidate();
             resp.getWriter().print("destroy Session ");
-            resp.getWriter().print("id:" + session.getId());
+            resp.getWriter().print("<br>expired session id:" + session.getId());
         }
     }
     
