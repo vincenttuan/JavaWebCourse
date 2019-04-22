@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="expires" content="0">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <title>Async IO</title>
+        <script>
+            function ajaxSuccess() {
+                var content = this.responseText;
+                console.log(content);
+                document.getElementById('demo').innerHTML = content;
+            }
+            function ajaxSubmit(oFormElement) {
+                if (!oFormElement.action) {
+                    return;
+                }
+                var xhttp = new XMLHttpRequest();
+                xhttp.onload = ajaxSuccess;
+                xhttp.open("post", oFormElement.action);
+                xhttp.send(new FormData(oFormElement));
+                document.getElementById('demo').innerHTML = '...uploading...';
+            }
+        </script>
+    </head>
+    <body style="padding: 20px">
+        <form class="pure-form pure-form-stacked"
+              method="post"
+              action="../servlet/async_io.do"
+              enctype="multipart/form-data"
+              onsubmit="ajaxSubmit(this); return false;">
+            <fieldset>
+                <legend>Async IO</legend>
+                檔案上傳 (upload): <input type="file" multiple name="upload"><br>
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </form>
+        <div id="demo"></div>
+    </body>
+</html>
