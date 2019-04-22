@@ -27,7 +27,8 @@ public class SessionServlet extends HttpServlet{
         if(session != null) {
             System.out.println("Del:" + session.getId());
             session.invalidate();
-            resp.getWriter().print("destroy Session");
+            resp.getWriter().print("destroy Session ");
+            resp.getWriter().print("id:" + session.getId());
         }
     }
     
