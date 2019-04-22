@@ -21,6 +21,7 @@ public class SessionServlet extends HttpServlet{
         } else {
             resp.getWriter().print("<br>session id:" + session.getId());
         }
+        session.setAttribute("user", req.getParameter("user"));
     }
     
     @Override

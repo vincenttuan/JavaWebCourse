@@ -13,7 +13,8 @@
                         document.getElementById("demo").innerHTML = this.responseText;
                     }
                 };
-                xhttp.open("GET", "../servlet/SessionServlet", true);
+                var user = document.getElementById("user").value;
+                xhttp.open("GET", "../servlet/SessionServlet?user=" + user, true);
                 xhttp.send();
             }
             function doPost() {
@@ -60,6 +61,7 @@
         <form class="pure-form" method="post" action="/JavaWebCourse/servlet/BMIServlet">
             <fieldset>
                 <legend>Session (<span id="count"></span> 人)</legend>
+                <input type="text" name="user" id="user"><p>
                 <button type="button" class="pure-button pure-button-primary" onclick="doGet()">(登入)建立 Session</button>
                 <button type="button" class="pure-button pure-button-primary" onclick="doPost()">(登出)Session 失效</button>
                 <button type="button" class="pure-button pure-button-primary" onclick="doGetStatus()">Session 狀態</button>

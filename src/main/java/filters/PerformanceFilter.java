@@ -19,11 +19,11 @@ public class PerformanceFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("PerformanceFilter");
+        //System.out.println("PerformanceFilter");
         long begin = System.currentTimeMillis();
         chain.doFilter(request, response);
         long end = System.currentTimeMillis();
-        System.out.println(((HttpServletRequest)request).getRequestURI() + " : " + (end - begin) + " ms");
+        //System.out.println(((HttpServletRequest)request).getRequestURI() + " : " + (end - begin) + " ms");
     }
 
     @Override
