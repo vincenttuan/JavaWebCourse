@@ -38,12 +38,28 @@
                 xhttp.open("GET", "../servlet/SessionServletStatus", true);
                 xhttp.send();
             }
+            function doGetCount() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("count").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "../servlet/SessionServletCount", true);
+                xhttp.send();
+            }
+            
+            function init() {
+                window.setInterval(doGetCount, 1000);
+                
+            }
         </script>
     </head>
-    <body style="padding: 10px" onunload="doPost()">
+    <body style="padding: 10px" onunload="doPost()" onload="init()">
         <form class="pure-form" method="post" action="/JavaWebCourse/servlet/BMIServlet">
             <fieldset>
-                <legend>Session</legend>
+                <legend>Session (<span id="count"></span> 人)</legend>
                 <button type="button" class="pure-button pure-button-primary" onclick="doGet()">(登入)建立 Session</button>
                 <button type="button" class="pure-button pure-button-primary" onclick="doPost()">(登出)Session 失效</button>
                 <button type="button" class="pure-button pure-button-primary" onclick="doGetStatus()">Session 狀態</button>
