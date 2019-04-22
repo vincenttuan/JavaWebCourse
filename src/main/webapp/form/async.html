@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Sync與Async即時資料</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript">
+        var count = 0;
+        function call(ms, tagName) {   
+        // 呼叫次數
+            document.getElementById('count').innerHTML = ++count;
+            var xhr;
+            if(window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            else if(window.ActiveXObject) {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    if(xhr.status == 200) {
+                    // 資料回報
+                        document.getElementById(tagName)
+                                      .innerHTML = xhr.responseText;
+                        asyncUpdate(ms, tagName);
+                    }
+                }
+            };
+            xhr.open('GET', '../servlet/async.do?ms='+ ms + '&timestamp=' + new Date().getTime());
+            xhr.send(null);
+        }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="10秒" onclick="call(10000, 'data_10')"> 
+    <input type="button" value="1秒" onclick="call(1000, 'data_1')">
+    <input type="button" value="0.1秒" onclick="call(100, 'data_01')">
+    <p>
+    資料回報(10秒): <span id="data_10">0</span><p>
+    資料回報(1秒): <span id="data_1">0</span><p>
+    資料回報(0.1秒): <span id="data_01">0</span><p>
+    呼叫次數: <span id="count">0</span><p>
+  </body>
+</html> 
