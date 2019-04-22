@@ -27,6 +27,17 @@
                 xhttp.open("POST", "../servlet/SessionServlet", true);
                 xhttp.send();
             }
+            function doGetStatus() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "../servlet/SessionServletStatus", true);
+                xhttp.send();
+            }
         </script>
     </head>
     <body style="padding: 10px">
@@ -35,6 +46,7 @@
                 <legend>Session</legend>
                 <button type="button" class="pure-button pure-button-primary" onclick="doGet()">(登入)建立 Session</button>
                 <button type="button" class="pure-button pure-button-primary" onclick="doPost()">(登出)Session 失效</button>
+                <button type="button" class="pure-button pure-button-primary" onclick="doGetStatus()">Session 狀態</button>
             </fieldset>
         </form>
         <div id="demo"></div>
