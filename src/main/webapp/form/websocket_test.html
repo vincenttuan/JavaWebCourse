@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+        <title>WebSocket Test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            window.onload = function () {
+                //獲取DOM元件
+                var loginBtn = document.getElementById("loginBtn");
+                
+                var webSocket;
+                var isConnectSuccess = false;
+
+                //設置登入鈕的動作，沒有登出，登入才可發言
+                loginBtn.addEventListener("click", function () {
+                    setWebSocket();
+                });
+                
+                //設置WebSocket
+                function setWebSocket() {
+                    var url = 'ws://' + window.location.hostname + ':8084/JavaWebCourse/websockettest';
+                    console.log(url);
+                    infoURL.innerText = url;
+                    //開始WebSocket連線
+                    webSocket = new WebSocket(url);
+                    //以下開始偵測WebSocket的各種事件
+                    //onerror , 連線錯誤時觸發  
+                    webSocket.onerror = function (event) {
+                        loginBtn.disabled = false;
+                        infoWindow.innerHTML = "登入失敗";
+                    };
+                    //onopen , 連線成功時觸發
+                    webSocket.onopen = function (event) {
+                        loginBtn.disabled = true;
+                        infoWindow.innerHTML = "連線成功";
+                    };
+
+                    //onmessage , 接收到來自Server的訊息時觸發
+                    webSocket.onmessage = function (event) {
+                        
+                    };
+
+
+                }
+                //setWebSocket();
+            }
+        </script>
+    </head>
+    <body style="padding: 10px">
+        <form class="pure-form" method="post" action="/JavaWebCourse/servlet/BMIServlet">
+            <fieldset>
+                <legend>WebSocket Test</legend>
+                <button type="button" class="pure-button pure-button-primary" id="loginBtn">Socket 登入</button>
+            </fieldset>
+        </form>
+        
+        <div id="infoURL"></div>
+        <div id="infoWindow"></div>
+    </body>
+</html>
