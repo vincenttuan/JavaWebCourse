@@ -10,6 +10,7 @@
                 var loginBtn = document.getElementById("loginBtn");
                 var chatRoomForm   = document.getElementById("chatRoomForm");
                 var userNameInput  = document.getElementById("userNameInput");
+                var messageInput  = document.getElementById("messageInput");
                 
                 var webSocket;
                 var isConnectSuccess = false;
@@ -18,6 +19,27 @@
                 loginBtn.addEventListener("click", function () {
                     setWebSocket();
                 });
+                
+                //Submit Form時送出訊息
+                chatRoomForm.addEventListener("submit", function () {
+                    sendMessage();
+                    return false;
+                });
+                
+                // 傳送訊息
+                function sendMessage() {
+                    //檢查WebSocket連接狀態
+                    console.log(webSocket);
+                    if (webSocket) {
+                        var messageInfo = {
+                            userName: userNameInput.value,
+                            message: messageInput.value
+                        }
+                        webSocket.send(JSON.stringify(messageInfo));
+                    } else {
+                        infoWindow.innerHTML = "未登入";
+                    }
+                }
                 
                 //設置WebSocket
                 function setWebSocket() {
@@ -64,6 +86,9 @@
                 <legend>WebSocket Test</legend>
                 <input type="text" id="userNameInput" placeholder="請輸入名稱" /> 
                 <button type="button" class="pure-button pure-button-primary" id="loginBtn">Socket 登入</button>
+                <p />    
+                <input type="text" id="messageInput" placeholder="請輸入訊息" /> 
+                <input type="submit" value="送出訊息" class="pure-button pure-button-primary" />
             </fieldset>
         </form>
         
