@@ -8,6 +8,8 @@
             window.onload = function () {
                 //獲取DOM元件
                 var loginBtn = document.getElementById("loginBtn");
+                var chatRoomForm   = document.getElementById("chatRoomForm");
+                var userNameInput  = document.getElementById("userNameInput");
                 
                 var webSocket;
                 var isConnectSuccess = false;
@@ -19,7 +21,7 @@
                 
                 //設置WebSocket
                 function setWebSocket() {
-                    var url = 'ws://' + window.location.hostname + ':8084/JavaWebCourse/websockettest';
+                    var url = 'ws://' + window.location.hostname + ':8080/JavaWebCourse/websockettest';
                     console.log(url);
                     infoURL.innerText = url;
                     //開始WebSocket連線
@@ -34,11 +36,20 @@
                     webSocket.onopen = function (event) {
                         loginBtn.disabled = true;
                         infoWindow.innerHTML = "連線成功";
+                        
+                        //送一個登入聊天室的訊息
+                        var message = {
+                            userName: userNameInput.value,
+                            message: "我登入了系統"
+                        };
+                        console.log(JSON.stringify(message))
+                        webSocket.send(JSON.stringify(message));
                     };
 
                     //onmessage , 接收到來自Server的訊息時觸發
                     webSocket.onmessage = function (event) {
-                        
+                        var messageObject = JSON.parse(event.data);
+                        messageDisplay.innerHTML += messageObject.userName + " 說 : " + messageObject.message + "<br />";
                     };
 
 
@@ -48,14 +59,16 @@
         </script>
     </head>
     <body style="padding: 10px">
-        <form class="pure-form" method="post" action="/JavaWebCourse/servlet/BMIServlet">
+        <form class="pure-form" id="chatRoomForm" onsubmit="return false;">
             <fieldset>
                 <legend>WebSocket Test</legend>
+                <input type="text" id="userNameInput" placeholder="請輸入名稱" /> 
                 <button type="button" class="pure-button pure-button-primary" id="loginBtn">Socket 登入</button>
             </fieldset>
         </form>
         
         <div id="infoURL"></div>
         <div id="infoWindow"></div>
+        <div id="messageDisplay"></div>
     </body>
 </html>
