@@ -18,6 +18,6 @@
         </h1>
         <h1><my:stock symbol="1101.tw"/><h1>
         <h1><my:stock symbol="${param.symbol}"/><h1>
-        <my2:table_2 />        
+        <my2:table message="我的報表" />        
     </body>
 </html>
