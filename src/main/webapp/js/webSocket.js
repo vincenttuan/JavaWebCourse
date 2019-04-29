@@ -41,7 +41,7 @@ window.onload = function () {
 
     //設置WebSocket
     function setWebSocket() {
-        var url = 'ws://' + window.location.hostname + ':8084/JavaWebCourse/websocket';
+        var url = 'ws://' + window.location.hostname + ':' + window.location.port + '/JavaWebCourse/websocket';
         console.log(url);
         //開始WebSocket連線
         webSocket = new WebSocket(url);
