@@ -14,5 +14,8 @@
                 she sell sea shell on the sea shore
             </my:search>
         </h1>
+        
+        <h1><my:stock symbol="1101.tw"/><h1>
+                
     </body>
 </html>
